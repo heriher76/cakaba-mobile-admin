@@ -17,6 +17,11 @@ Route::get('/', function () {
 
 Auth::routes();
 
+Route::get('/clear-config', function() {
+    $exitCode = Artisan::call('config:clear');
+    return "config clear";
+});
+
 Route::group(['middleware' => 'auth'], function () use ($router) {
   Route::get('/admin', 'HomeController@index')->name('home');
   Route::resource('/admin/calendar', 'CalendarController');
